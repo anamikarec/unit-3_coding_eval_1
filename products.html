@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function product(){
+            let res = await fetch("http://localhost:3001/products");
+            let data = await res.json();
+            console.log(data);
+            create(data);
+        }
+        product();
+
+        function create(data){
+            var cont = document.createElement('div');
+            for(let userData of data){
+                const div = document.createElement('div');
+
+                const id1 = document.createElement('p');
+                id1.textContent = userData.id;
+
+                if(userData.id > 20 && userData.id <29)
+                {
+                const id2 = document.createElement('p');
+                id2.textContent = userData.name;
+
+                const price = document.createElement('p');
+                price.textContent = "Price :"+userData.currency+userData.price;
+
+                const qty = document.createElement('p');
+                qty.textContent = "Available Quantity :"+userData.available_qty;
+
+                div.append(id1,id2,price,qty);
+                div.style.border = "1px dashed grey";
+                div.style.padding = "10px";
+                div.style.margin = "10px";
+                div.style.height = "200px";
+                div.style.width = "250px";
+                div.style.float = "left";
+
+
+                cont.append(div);
+            }
+        }
+            document.body.append(cont);
+        }
+
+
+    </script>
+</body>
+</html>
